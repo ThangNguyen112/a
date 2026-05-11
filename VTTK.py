@@ -11,15 +11,15 @@ profile_data = {
             "hide_avatar":0,
             "initData":"query_id=AAFXkwdJAAAAAFeTB0kj2Lke&user=%7B%22id%22%3A1225233239%2C%22first_name%22%3A%22No%22%2C%22last_name%22%3A%22Mar%22%2C%22username%22%3A%22ThangNG2303%22%2C%22language_code%22%3A%22vi%22%2C%22allows_write_to_pm%22%3Atrue%2C%22photo_url%22%3A%22https%3A%5C%2F%5C%2Ft.me%5C%2Fi%5C%2Fuserpic%5C%2F320%5C%2FjItcs-C6BKkzSfm_5ilr_gv3zjuy9Bw6EwMDLAozHq4.svg%22%7D&auth_date=1778167150&signature=J3Gs51a0eLeUMewiVX5KUzEjcQRHRJ48efNfzwgiwZ2io7XS6AT8SANNGtpv18NR_hr2fCVru17Dyd6qtJoADw&hash=e843927a9567d94d7adcec8f93182f5b95ab7ae616d3ac7f8860cfeb90772bb2",
 }
-def sell_data(resource, amount, price):
+def sell(resource, amount, price):
         sell_data = {
                     "resource_type":resource,
                     "amount":amount,
                     "price_gold":price
         }
         sell_data.update(profile_data)
-        return sell_data
-
+        post_sell = requests.post(sell_url, json=sell_data) 
+        return post_sell
 user_data = {
             "start_param":"6118757082",
             "device_code":"DEV_4t7mdrv9x_1778063410279"
@@ -73,7 +73,8 @@ while True:
         # stone 1000 9000
         # food 1000 9500
         #post_sell = requests.post(sell_url, json=sell_data('wood', 1000, 9000)) 
-        post_sell = requests.post(sell_url, json=sell_data('stone', 1000, 10000)) 
+        post_sell = random.choice([sell('food',1000,10000-random.randint(0,3)*500)])
+        
         if post_sell.json()['success'] == False:
             i = 1
         print(post_sell.text)
