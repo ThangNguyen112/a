@@ -64,9 +64,11 @@ while True:
 
     taps_data.update(profile_data)
     post_tap = requests.post(tap_url, json=taps_data)
-    if post_tap.json()['success'] == False:
-        time.sleep(10)
-    print(post_tap.text)
+    try:
+        if post_tap.json()['success'] == False:
+            time.sleep(10)
+    except:
+        print(post_tap.text)
     if i == 0:
         time.sleep(5)
         # wood 1000 9000
@@ -74,12 +76,13 @@ while True:
         # food 1000 9500
         #post_sell = requests.post(sell_url, json=sell_data('wood', 1000, 9000)) 
         post_sell = random.choice([sell('food',1000,10000-random.randint(0,3)*500)])
-        
-        if post_sell.json()['success'] == False:
-            i = 1
-        print(post_sell.text)
+        try:
+            if post_sell.json()['success'] == False:
+                i = 1
+        except:
+            print(post_sell.text)
             
-    time.sleep(225)
+    time.sleep(200)
     t += 5
     if (t%40) == 0:
         print('ok')
