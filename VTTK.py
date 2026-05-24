@@ -33,8 +33,6 @@ i = 0
 t = 0
 
 while True:
-    taps = random.randint(300,700)
-    #taps = 1
     post_user = requests.post(user_url, json=user_data)
     try: 
         energy = post_user.json()['user']['energy']
@@ -69,18 +67,6 @@ while True:
             time.sleep(10)
     except:
         print(post_tap.text)
-    if i == 0:
-        time.sleep(5)
-        # wood 1000 9000
-        # stone 1000 9000
-        # food 1000 9500
-        #post_sell = requests.post(sell_url, json=sell_data('wood', 1000, 9000)) 
-        post_sell = random.choice([sell('food',1000,10000-random.randint(0,3)*500)])
-        try:
-            if post_sell.json()['success'] == False:
-                i = 1
-        except:
-            print(post_sell.text)
             
     time.sleep(200)
     t += 5
