@@ -67,11 +67,8 @@ while True:
             time.sleep(10)
     except:
         print(post_tap.text)
-            
+
     time.sleep(200)
     t += 5
-    if (t%40) == 0:
-        print('ok')
-        i = 0
     print(t)
             
